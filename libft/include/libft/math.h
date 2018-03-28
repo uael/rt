@@ -14,8 +14,10 @@
 # define LIBFT_MATH_H
 
 # include "tys.h"
-# include "math/m4.h"
+# include "math/v2.h"
 # include "math/v3.h"
+# include "math/v4.h"
+# include "math/m4.h"
 # include "math/point.h"
 
 # ifndef ABS

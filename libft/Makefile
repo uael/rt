@@ -64,9 +64,9 @@ SRC_NAME = \
   io/fcntl.c io/ifs.c io/ifs_2.c io/fputc.c io/fputs.c io/stdin.c io/fopen.c \
   lib/atoi.c lib/clean.c lib/dtor.c lib/getenv.c lib/itoa.c lib/join.c \
   lib/error.c lib/wctomb.c \
-  math/imax.c math/imin.c math/m4.c math/m4_mul.c math/m4_rot.c \
-  math/m4_trans.c math/pow.c math/pow2_next.c math/umax.c math/umin.c \
-  math/v3.c math/v3_2.c math/eq.c math/eq_2.c \
+  math/imax.c math/imin.c \
+  math/pow.c math/pow2_next.c math/umax.c math/umin.c \
+  math/eq.c math/eq_2.c \
   mem/alloc.c \
   str/bzero.c str/memccpy.c str/memchr.c str/memcmp.c str/memcpy.c \
   str/memdup.c str/memmove.c str/memrcpy.c str/memset.c str/stpcpy.c \

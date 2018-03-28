@@ -38,7 +38,7 @@ LIB_NAME = $(LIBS) glfw
 endif
 3TH_NAME = libft
 SRC_NAME = \
-	main.c
+	main.c glad.c
 
 3TH = $(addprefix $(3TH_PATH)/, $(3TH_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
@@ -91,11 +91,20 @@ endif
 	+$(MAKE) -j4 $(PROJECT) "CFLAGS = $(WWFLAGS)" "OBJ_PATH = $(OBJ_DIR)/rel"
 	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
 
+$(HOME)/.brew:
+	@$(PRINTF) "\r\x1b[20C\x1b[0K$<"
+	@./scripts/fixbrew.sh &>/dev/null
+	@brew install glfw3
+
+src/glad.c:
+	@$(PRINTF) "\r\x1b[20C\x1b[0K$<"
+	@python -m glad --out-path . --generator c --spec gl &>/dev/null
+
 $(PROJECT): $(3DE) $(OBJ)
 	@$(PRINTF) "\r\x1b[20C\x1b[0K$@"
 	$(CC) $(CFLAGS) $(INC) $(LNK) $(OBJ) $(LIB) -o $(PROJECT)
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH) src/glad.c $(HOME)/.brew
 	@$(PRINTF) "\r\x1b[20C\x1b[0K$<"
 	$(CC) $(CFLAGS) $(INC) -MMD -MP -c $< -o $@
 
@@ -103,7 +112,7 @@ $(OBJ_PATH):
 	mkdir -p $(dir $(OBJ))
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) include/glad include/KHR src/glad.c
 	@$(PRINTF) "%-20s\033[32m✔\033[0m\n" "$(PROJECT): $@"
 
 fclean: clean

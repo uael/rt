@@ -13,6 +13,10 @@
 #include "libft/io.h"
 #include "libft/ds.h"
 
+#ifndef OPEN_MAX
+# define OPEN_MAX UINT8_MAX
+#endif
+
 int	ft_getsln(int const fd, char **line, t_sds *sv)
 {
 	int st;

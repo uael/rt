@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 PROJECT ?= libft
-WFLAGS = -Werror -Wextra -Wall
+WFLAGS = #-Werror -Wextra -Wall
 WWFLAGS = $(WFLAGS) -Wpedantic -Wshadow -Wconversion -Wcast-align \
   -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code -Winit-self \
   -Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
@@ -120,7 +120,7 @@ ifneq ($(3TH_NAME),)
 endif
 	@$(PRINTF) "%-20s" "$(PROJECT).a: lib"
 	+$(MAKE) -j4 $(PROJECT).a "CFLAGS = $(RCFLAGS)" "OBJ_PATH = $(OBJ_DIR)/rel"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
+	@$(PRINTF) "\r\033[20C\033[0K\033[32mOK\033[0m\n"
 
 dev:
 ifneq ($(3TH_NAME),)
@@ -129,7 +129,7 @@ endif
 	@$(PRINTF) "%-20s" "$(PROJECT).dev: exe"
 	+$(MAKE) -j4 $(PROJECT).dev.a "PROJECT = $(PROJECT).dev" "CFLAGS = $(DCFLAGS)" \
 	  "OBJ_PATH = $(OBJ_DIR)/dev"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
+	@$(PRINTF) "\r\033[20C\033[0K\033[32mOK\033[0m\n"
 
 san:
 ifneq ($(3TH_NAME),)
@@ -138,7 +138,7 @@ endif
 	@$(PRINTF) "%-20s" "$(PROJECT).san: exe"
 	+$(MAKE) -j4 $(PROJECT).san.a "PROJECT = $(PROJECT).san" "CFLAGS = $(SCFLAGS)" \
 	  "OBJ_PATH = $(OBJ_DIR)/san" "CC = clang"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
+	@$(PRINTF) "\r\033[20C\033[0K\033[32mOK\033[0m\n"
 
 mecry:
 ifneq ($(3TH_NAME),)
@@ -146,15 +146,15 @@ ifneq ($(3TH_NAME),)
 endif
 	@$(PRINTF) "%-20s" "$(PROJECT).a: make me cry.."
 	+$(MAKE) -j4 $(PROJECT).a "CFLAGS = $(WWFLAGS)" "OBJ_PATH = $(OBJ_DIR)/rel"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
+	@$(PRINTF) "\r\033[20C\033[0K\033[32mOK\033[0m\n"
 
 $(PROJECT).a: $(OBJ)
-	@$(PRINTF) "\r\x1b[20C\x1b[0K$@"
+	@$(PRINTF) "\r\033[20C\033[0K$@"
 	ar -rc $(PROJECT).a $(OBJ)
 	ranlib $(PROJECT).a
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
-	@$(PRINTF) "\r\x1b[20C\x1b[0K$<"
+	@$(PRINTF) "\r\033[20C\033[0K$<"
 	$(CC) $(CFLAGS) $(INC) -MMD -MP -c $< -o $@
 
 $(OBJ_PATH):
@@ -164,7 +164,7 @@ clean:
 	rm -f $(OBJ) $(DEP)
 	rm -f $(OBJ:$(OBJ_DIR)/rel%=$(OBJ_DIR)/dev%) $(DEP:$(OBJ_DIR)/rel%=$(OBJ_DIR)/dev%)
 	rm -f $(OBJ:$(OBJ_DIR)/rel%=$(OBJ_DIR)/san%) $(DEP:$(OBJ_DIR)/rel%=$(OBJ_DIR)/san%)
-	@$(PRINTF) "%-20s\033[32m✔\033[0m\n" "$(PROJECT): $@"
+	@$(PRINTF) "%-20s\033[32mOK\033[0m\n" "$(PROJECT): $@"
 
 fclean: clean
 ifneq ($(3TH_NAME),)
@@ -172,7 +172,7 @@ ifneq ($(3TH_NAME),)
 endif
 	test -d $(OBJ_DIR) && find $(OBJ_DIR) -type d | sort -r | xargs rmdir || true
 	rm -f $(PROJECT){,.san,.dev}.a
-	@$(PRINTF) "%-20s\033[32m✔\033[0m\n" "$(PROJECT): $@"
+	@$(PRINTF) "%-20s\033[32mOK\033[0m\n" "$(PROJECT): $@"
 
 re: clean all
 

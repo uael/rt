@@ -38,8 +38,8 @@ SRC_NAME = \
 
 3TH = $(addprefix $(3TH_PATH)/, $(3TH_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
-LNK = $(addprefix -L, $(3TH))
-INC = $(addprefix -I, $(INC_PATH) $(addsuffix /include, $(3TH)))
+LNK = $(addprefix -L, $(3TH) $(HOME)/.brew/lib/)
+INC = $(addprefix -I, $(INC_PATH) $(addsuffix /include, $(3TH)) $(HOME)/.brew/include/)
 LIB = $(addprefix -l, $(LIB_NAME))
 DEP = $(OBJ:%.o=%.d)
 
@@ -88,7 +88,7 @@ $(PROJECT): $(3DE) $(OBJ)
 
 $(SRC_PATH)/glad.c:
 	@$(PRINTF) "\r\033[20C\033[0K$@"
-	@glad --out-path . --generator c --spec gl --omit-khrplatform 2>/dev/null 1>/dev/null
+	@python -m glad --out-path . --generator c --spec gl --omit-khrplatform 2>/dev/null 1>/dev/null
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
 	@$(PRINTF) "\r\033[20C\033[0K$<"

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT = rt
+PROJECT = ftx
 
 THIS_DIR = $(shell pwd)
 filter-false = $(strip $(filter-out 0 off OFF false FALSE,$1))
@@ -63,6 +63,7 @@ all: build/.ran-cmake
 
 help: build/.ran-cmake
 	@+$(BUILD_CMD) -C build help
+	@echo "... libftx"
 	@echo "... clean"
 	@echo "... distclean"
 	@echo "... re"
@@ -84,7 +85,9 @@ distclean: clean
 
 re: clean all
 
-install: | rt
+libftx.a: all
+
+install: | ftx
 	@+$(BUILD_CMD) -C build install
 
 .PHONY: clean distclean re install

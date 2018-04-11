@@ -22,7 +22,7 @@ inline int		ft_atoi(char const *str)
 	if (!ft_isdigit(*str) && *str != '-' && *str != '+')
 		return (ft_error((int)ret, EINVAL));
 	if (*str == '-')
-		neg = ++str > 0;
+		neg = ++str != NULL;
 	else if (*str == '+')
 		++str;
 	if (!ft_isdigit(*str))

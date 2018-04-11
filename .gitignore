@@ -12,4 +12,4 @@ rt
 src/glad.c
 include/glad*
 include/KHR*
-
+/build/
